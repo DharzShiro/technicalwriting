@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+        :root {
+            --primary-color: crimson;
+            --primary-color-dark: #fff;
+            --secondary-color: crimson;
+            --text-dark: #fff;
+            --text-light: #6b7280;
+            --extra-light: #fff;
+            --max-width: 1200px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f0ffff;
+        }
+
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            height: 82px;
+        }
+
+        .nav__content {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 1.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav .logo a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: 0.3s;
+            padding: 0.5rem;
+        }
+
+        nav .logo a:hover {
+            color: var(--primary-color-dark);
+        }
+
+        nav .checkbox {
+            display: none;
+        }
+
+        nav input {
+            display: none;
+        }
+
+        nav .checkbox i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            list-style: none;
+            transition: left 0.3s;
+        }
+
+        nav ul li a {
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            border-top-color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        section {
+            background: #f0ffff;
+            padding: 50px 0;
+            margin-top: 90px;
+
+        }
+
+
+        @mixin aspect-ratio($width, $height) {
+            position: relative;
+
+            &:before {
+                display: block;
+                content: "";
+                width: 100%;
+                padding-top: ($height / $width) * 100%;
+            }
+
+            >img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        section {
+            background: #f0ffff;
+            padding: 50px 0;
+        }
+
+        .container {
+            max-width: 1044px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .carousel {
+            display: block;
+            text-align: center;
+            position: relative;
+            margin-bottom: 100px;
+            margin: 0 auto;
+
+            >input {
+                clip: rect(1px, 1px, 1px, 1px);
+                clip-path: inset(50%);
+                height: 1px;
+                width: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+
+                &:nth-of-type(6):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -500%;
+                }
+
+                &:nth-of-type(5):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -400%;
+                }
+
+                &:nth-of-type(4):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -300%;
+                }
+
+                &:nth-of-type(3):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -200%;
+                }
+
+                &:nth-of-type(2):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: -100%;
+                }
+
+                &:nth-of-type(1):checked~.carousel__slides .carousel__slide:first-of-type {
+                    margin-left: 0%;
+                }
+
+                &:nth-of-type(1):checked~.carousel__thumbnails li:nth-of-type(1) {
+                    box-shadow: 0px 0px 0px 5px rgba(220, 20, 60, 100);
+                }
+
+                &:nth-of-type(2):checked~.carousel__thumbnails li:nth-of-type(2) {
+                    box-shadow: 0px 0px 0px 5px rgba(220, 20, 60, 100);
+                }
+
+                &:nth-of-type(3):checked~.carousel__thumbnails li:nth-of-type(3) {
+                    box-shadow: 0px 0px 0px 5px rgba(220, 20, 60, 100);
+                }
+
+                &:nth-of-type(4):checked~.carousel__thumbnails li:nth-of-type(4) {
+                    box-shadow: 0px 0px 0px 5px rgba(220, 20, 60, 100);
+                }
+
+                &:nth-of-type(5):checked~.carousel__thumbnails li:nth-of-type(5) {
+                    box-shadow: 0px 0px 0px 5px rgba(220, 20, 60, 100);
+                }
+
+                &:nth-of-type(6):checked~.carousel__thumbnails li:nth-of-type(6) {
+                    box-shadow: 0px 0px 0px 5px rgba(220, 20, 60, 100);
+                }
+            }
+        }
+
+        .carousel__slides {
+            position: relative;
+            z-index: 1;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        .carousel__slide {
+            position: relative;
+            display: block;
+            flex: 1 0 100%;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 300ms ease-out;
+            vertical-align: top;
+            box-sizing: border-box;
+            white-space: normal;
+            justify-content: center;
+
+            figure {
+                display: flex;
+                margin: 0;
+            }
+
+            div {
+                @include aspect-ratio(3, 2);
+                width: 100%;
+            }
+
+            img {
+                display: block;
+                flex: 1 1 auto;
+                object-fit: cover;
+            }
+
+            figcaption {
+                align-self: flex-start;
+                padding: 20px 20px 0 20px;
+                flex: 0 0 auto;
+                width: 25%;
+                min-width: 150px;
+                font-family: "Poppins", sans-serif;
+                font-weight: bold;
+                font-size: 20px;
+                color: crimson;
+            }
+
+            .credit {
+                margin-top: 1rem;
+                color: rgba(0, 0, 0, 0.5);
+                display: block;
+                font-weight: lighter;
+                font-size: 15px;
+                text-align: justify;
+            }
+
+            &.scrollable {
+                overflow-y: scroll;
+            }
+        }
+
+        .carousel__slide img {
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+
+
+        .carousel__thumbnails {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+
+            margin: 0 -10px;
+
+            .carousel__slides+& {
+                margin-top: 20px;
+            }
+
+            li {
+                flex: 1 1 auto;
+                max-width: calc((100% / 6) - 20px);
+                margin: 0 10px;
+                transition: all 300ms ease-in-out;
+            }
+
+            label {
+                display: block;
+                @include aspect-ratio(1, 1);
+
+
+                &:hover,
+                &:focus {
+                    cursor: pointer;
+
+                    img {
+                        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
+                        transition: all 300ms ease-in-out;
+                    }
+                }
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .new-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f0ffff;
+            color: #6b7280;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-align: justify;
+
+        }
+
+
+        .new-content h2 {
+            color: crimson;
+            font-size: 30px;
+        }
+
+        .new-content h3 {
+            color: black;
+            font-size: 20px;
+        }
+
+        .new-content p {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+            margin-top: 50px;
+            background-color: #f0ffff;
+            color: #000000;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <title> Dharryl's Portfolio </title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav__content">
+            <div class="logo"><a href="#"> DHARZ </a></div>
+            <label for="checkbox" class="checkbox"><i class="fa fa-bars"></i></label>
+            <input type="checkbox" id="checkbox">
+            <ul>
+                <li><a href="index.html" class="active"> HOME </a></li>
+                <li><a href="blog.html"> SAMPLE OUTPUT </a></li>
+                <li><a href="project.html"> ORIGINAL OUTPUT </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section>
+
+        <div class="container">
+            <div class="new-content">
+                <h2>Installation Guide</h2>
+                <h3>VirtualBox</h3>
+                <br>
+                <h2>Introduction</h2>
+                <br>
+                <p>VirtualBox is a powerful, open-source virtualization software developed by Oracle. It allows users to
+                    create and run virtual machines (VMs) on their physical computer, enabling the simulation of an
+                    entire operating system within a host system. This means that VirtualBox lets you run multiple
+                    operating systems on a single physical computer, providing an isolated environment for testing,
+                    development, and experimentation. <br> <br> To download VirtualBox, go to the official site
+                    virtualbox.org and download the latest version for windows.
+                </p>
+
+            </div>
+            <p style="color: crimson; text-align: center; font-size: 15px; font-weight: bold;">Note: Slide the picture
+                using the cursor or keyboard arrows
+            </p>
+            <div class="container">
+                <div class="carousel">
+                    <input type="radio" name="slides" checked="checked" id="slide-1" tabindex="-1">
+                    <input type="radio" name="slides" id="slide-2" tabindex="-1">
+                    <input type="radio" name="slides" id="slide-3" tabindex="-1">
+                    <input type="radio" name="slides" id="slide-4" tabindex="-1">
+                    <input type="radio" name="slides" id="slide-5" tabindex="-1">
+                    <input type="radio" name="slides" id="slide-6" tabindex="-1">
+                    <ul class="carousel__slides">
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="img/S1.png" alt="">
+                                </div>
+                                <figcaption>
+                                    Getting Started
+                                    <span class="credit">This initial phase involves launching the VirtualBox
+                                        application
+                                        and preparing to create a new virtual machine. You will choose the operating
+                                        system
+                                        (Windows) to be installed on the virtual machine and specify the necessary
+                                        configuration details, such as RAM, CPU, and disk space allocation. It's
+                                        essential
+                                        to ensure that your physical machine meets the requirements for running
+                                        VirtualBox
+                                        and the chosen operating system.</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="img/S2.png" alt="">
+                                </div>
+                                <figcaption>
+                                    Select Installation Location
+                                    <span class="credit">In this step, you will select the directory where VirtualBox
+                                        will
+                                        store the virtual machine's files. This includes the virtual hard disk image and
+                                        configuration files. You can choose a default location or specify a custom path
+                                        depending on the available storage space on your system. It is important to
+                                        select a
+                                        location with enough free space for the operating system and any additional
+                                        software
+                                        you plan to install within the virtual machine.</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="img/S3.png" alt="">
+                                </div>
+                                <figcaption>
+                                    Creating Entries and Shortcuts
+                                    <span class="credit">After configuring the VM, VirtualBox will create necessary
+                                        entries
+                                        to integrate the virtual machine with your system's boot menu. It will also
+                                        create
+                                        shortcuts to easily access and manage the VM. These shortcuts allow you to start
+                                        the
+                                        virtual machine directly from your desktop or applications menu, making it
+                                        convenient to launch and manage the virtual environment.</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="img/S4.png" alt="">
+                                </div>
+                                <figcaption>
+                                    Ready to Install
+                                    <span class="credit">At this stage, VirtualBox will display a summary of the
+                                        configuration settings for the virtual machine, such as memory size, disk space,
+                                        and
+                                        operating system type. This is your final opportunity to review and modify these
+                                        settings before proceeding. Once you're satisfied with the configuration, you
+                                        can
+                                        click the “Install” button to begin the installation process.</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="img/S5.png" alt="">
+                                </div>
+                                <figcaption>
+                                    Installing Files and packages
+                                    <span class="credit">In this step, the operating system's files and essential
+                                        packages
+                                        are installed onto the virtual hard disk. This includes copying system files,
+                                        drivers, and other components needed for the operating system to function. The
+                                        installation process may take some time, depending on the size of the operating
+                                        system and the performance of your computer.</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="img/S6.png" alt="">
+                                </div>
+                                <figcaption>
+                                    Finished Installation
+                                    <span class="credit">The installation is now complete, and VirtualBox has
+                                        successfully
+                                        set up the virtual machine with the operating system installed. At this point,
+                                        you
+                                        can boot into the new virtual machine and begin using it just like a physical
+                                        computer. Any remaining setup, such as installing additional drivers or updates,
+                                        can
+                                        be done after the initial boot-up to ensure that the system operates
+                                        optimally.</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </ul>
+                    <ul class="carousel__thumbnails">
+                        <li>
+                            <label for="slide-1"><img src="img/S1.png" alt=""></label>
+                        </li>
+                        <li>
+                            <label for="slide-2"><img src="img/S2.png" alt=""></label>
+                        </li>
+                        <li>
+                            <label for="slide-3"><img src="img/S3.png" alt=""></label>
+                        </li>
+                        <li>
+                            <label for="slide-4"><img src="img/S4.png" alt=""></label>
+                        </li>
+                        <li>
+                            <label for="slide-5"><img src="img/S5.png" alt=""></label>
+                        </li>
+                        <li>
+                            <label for="slide-6"><img src="img/S6.png" alt=""></label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="container">
+                <div class="new-content">
+                    <h2>Features</h2>
+                    <br>
+                    <p>Cross-Platform Compatibility: <br> Multi OS Support - VirtualBox runs on major host operating
+                        systems
+                        including Windows, macOS, Linux, and Oracle Solaris. It also supports a variety of guest
+                        operating systems, including Windows, Linux, Mac OS X, Solaris, and others.</p>
+                    <br>
+                    <p>Multiple Virtual Machine Support: <br> Multiple VMs - You can create and run several virtual
+                        machines (VMs) on a single host. Each VM can have its own operating system, which can be
+                        different from the host OS.
+                        including Windows, macOS, Linux, and Oracle Solaris. It also supports a variety of guest
+                        operating systems, including Windows, Linux, Mac OS X, Solaris, and others.</p>
+                    <br>
+                    <p>Snapshots and Clones: <br> Snapshots VirtualBox - allows you to take snapshots of a virtual
+                        machine
+                        at any point in time. This helps you save the current state of the VM, so you can easily return
+                        to that state later. <br> Clones - You can clone VMs to create an exact copy, which is useful
+                        for
+                        testing different configurations or setting up similar environments. </p>
+                    <br>
+                    <p>Seamless Mode: <br> Seamless Integration - VirtualBox allows you to run guest applications
+                        seamlessly alongside your host applications. This means the guest OS's applications will appear
+                        as if they are part of the host OS's desktop, creating a more integrated and user-friendly
+                        experience.</p>
+                    <br>
+                    <p>Virtual Machine Storage and Disk Control: <br> Dynamic Virtual Disks - VirtualBox supports
+                        virtual
+                        hard disks (VHD, VDI, VMDK) that grow in size as the VM uses more storage, allowing you to save
+                        disk space. <br> Fixed Virtual Disks - You can also create fixed-size virtual disks that do not
+                        change size once created.</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="new-content">
+                    <h2>Troubleshooting</h2>
+                    <br>
+                    <p>VirtualBox Won't Start: <br> Cause - Missing dependencies or conflicting software. <br> Fix -
+                        Disable Hyper-V (Windows) and reinstall VirtualBox. Run as administrator.</p>
+                    <br>
+                    <p>VM Won't Boot: <br> Cause - Incorrect boot order or corrupted VM. <br> Fix - Check boot
+                        settings (ISO or hard disk), recreate the VM if needed.</p>
+                    <br>
+                    <p>VM Performance Issues: <br> Cause - Insufficient resources. <br> Fix - Increase RAM and CPU
+                        allocation, enable 3D acceleration.</p>
+                    <br>
+                    <p>Network Problems: <br> Cause - Incorrect network settings. <br> Fix - Change network adapter
+                        (NAT, Bridged, Host-Only), disable firewall.</p>
+                    <br>
+                    <p>VM Crashes: <br> Cause - Misconfigured VM or insufficient resources. <br> Fix - Update OS,
+                        review logs, reduce allocated resources.</p>
+                    <br>
+                    <p>USB Devices Not Recognized: <br> Cause - USB controller not enabled. <br> Fix - Enable USB
+                        controller and
+                        install the VirtualBox Extension Pack.</p>
+                    <br>
+                    <p>Guest Additions Won't Install: <br> Cause - Missing dependencies. <br> Fix - Install required
+                        packages (Linux), mount the ISO manually.</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="new-content">
+                    <h2>Conclusion</h2>
+                    <br>
+                    <p>VirtualBox is a feature-rich and flexible virtualization tool, offering various advanced
+                        capabilities like snapshots, seamless mode, resource management, and network
+                        customization. Whether you are a developer, tester, or just someone wanting to run
+                        different operating systems on your computer, VirtualBox provides all the necessary
+                        features to create, manage, and run virtual machines efficiently.</p>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <div class="container">
+                <div class="new-content">
+                    <h2>White Paper</h2>
+                    <h3>Datacrypt: Aglayan Safeguarding System</h3>
+                    <br>
+                    <h2>Introduction</h2>
+                    <br>
+                    <img src="img/W1.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <br>
+                    <p>Data is very essential in today's day age since people gather data to help with
+                        decisions, understand the world, identify trends, make predictions. As there are
+                        countless merit to data, there are also downsides of it. When certain data are
+                        easily accessed by unauthorized person, data can be a use in malicious intentions;
+                        certain data can be used to threaten someone or spread false information on someone
+                        and other illegal usage of data. This project aims to protect data by
+                        encrypting data with a sophisticated codename and a pin which is only accessible to
+                        authorized individuals. To achieve the desired outcome, the project makes use of C
+                        programming language techniques and concepts which was previously discussed during
+                        2nd semester. The project uses the concepts arrays, string, file handling and
+                        techniques of conditional statement and iterations.</p>
+                    <br>
+                    <h2>General Objective</h2>
+                    <br>
+                    <img src="img/W2.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <br>
+                    <p>The sole objective is to use programming skills and knowledge to safeguard data that
+                        can be potential instrument in illegal activities. It includes applying the
+                        encryption methods to protect the data, adoption mechanisms in a secure way of
+                        adding new information to the systems and making that in a confidential manner of
+                        storing information.</p>
+                    <br>
+                    <img src="img/W3.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <br>
+                    <p>The program will address specifically the key function of data safeguarding and it
+                        will come with an encryption system to the data using a sophisticated codename as
+                        well as a pin code and the capability to add or modify the data, to view the list of
+                        data, to update the data, to delete data, and to search of data. These functions
+                        help only the authorized personnel to view and process the data while encryption and
+                        authentication services deny access of unauthorized individuals.</p>
+                    <br>
+                    <h2>Functionality</h2>
+                    <br>
+                    <p>The system is capable of storing and securing data by requiring the exact codename
+                        and pin to open all the information that data contains. By using c program
+                        techniques and function like iteration, decisions, functions, it will be able to
+                        create this program.</p>
+                    <br>
+                    <img src="img/W4.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <br>
+                    <p> There were a handful of parts in the code that could have made improvements and make
+                        it more logical. This part was the one allows the user to view all the data within
+                        the system with sophisticated codename and pin. In this part it has limitation
+                        whereas all the stored data have the same codename and pin, but it would have been
+                        better if it has different codename and pin. Additionally, it will be good if there
+                        is such function that display a statistical record of the data within and
+                        categorized it either it is a male or female. Unfortunately, it could not apply it
+                        to the program due to lack of time. Still thankful in spite all the shortcomings
+                        because it has done more than what planned initially.</p>
+                    <br>
+                    <h2>Software and Hardware Used</h2>
+                    <br>
+                    <p>CodeBlocks: CodeBlocks is a free, open-source Integrated Development Environment
+                        (IDE) designed for C, C++, and Fortran development. It provides a user-friendly
+                        interface for writing, compiling, debugging, and running code. <br> <br> Computer:
+                        This
+                        program can be opened on any computer that has an installed C compiler application
+                        and has enough storage to hold data. There are no specific hardware devices or specs
+                        that this program requires, as long as the device on hand has a suitable,
+                        compatible, and updated C compiler application.</p>
+                    <br>
+                    <h2>Conclusion</h2>
+                    <br>
+                    <img src="img/W5.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <br>
+                    <p>The DataCrypt system successfully safeguards sensitive data using encryption and
+                        authentication, allowing only authorized access to add, view, update, and delete
+                        information. Though it has limitations, such as shared codenames and a lack of
+                        backup features, the system meets its core objective of protecting data. The project
+                        also provided valuable learning experiences in C programming and system development.
+                    </p>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <div class="container">
+                <div class="new-content">
+                    <h2>Powerpoint Presentation</h2>
+                    <br>
+                    <img src="img1/PPT1.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img1/PPT2.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img1/PPT3.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img1/PPT4.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img1/PPT5.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img2/PPT6.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img2/PPT7.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img2/PPT8.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img2/PPT9.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img2/PPT10.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img3/PPT11.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img3/PPT12.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img3/PPT13.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img3/PPT14.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img3/PPT15.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img4/PPT16.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img4/PPT17.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img4/PPT18.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                    <img src="img4/PPT19.png" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+                </div>
+            </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Dharryl Dave. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
